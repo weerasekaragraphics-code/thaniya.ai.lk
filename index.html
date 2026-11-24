@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070B0A">
+
+    <title>THANIYA AI — Intelligent, Independent AI Assistant</title>
+    <meta name="description" content="Experience next-generation artificial intelligence inspired by strength, wisdom, and independence. Chat with Thaniya AI today.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="THANIYA AI">
+    <meta property="og:title" content="THANIYA AI — Next-Gen Intelligent Assistant">
+    <meta property="og:description" content="Independent. Intelligent. Unstoppable. Start a conversation with Thaniya AI.">
+    <!-- TODO: replace with your hosted logo URL -->
+    <!-- WhatsApp / Open Graph Preview -->
+<meta property="og:image" content="https://yourusername.github.io/thaniya-ai/logo.png">
+    <meta property="og:image:alt" content="Thaniya AI logo">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://thaniyaai.com">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="THANIYA AI — Next-Gen Intelligent Assistant">
+    <meta name="twitter:description" content="Independent. Intelligent. Unstoppable. Start a conversation with Thaniya AI.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/070A09/10B981?text=THANIYA+AI">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: { 950: '#070B0A', 900: '#0B1110', 800: '#121B19' },
+                        emerald: { 300: '#6EE7B7', 400: '#34D399', 500: '#10B981', 600: '#059669' }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        html, body {
+            background-color: #070B0A;
+            color: #F8FAFC;
+            overflow-x: hidden;
+            max-width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .hero-headline {
+            font-size: clamp(2rem, 7.2vw, 4.5rem);
+            line-height: 1.12;
+        }
+
+        .ambient-top-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(16,185,129,0.12) 0%, rgba(7,11,10,0) 65%);
+        }
+
+        .btn-thaniya {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            box-shadow: 0 0 25px rgba(16,185,129,0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+            transition: transform .2s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1);
+            touch-action: manipulation;
+        }
+        @media (hover: hover) {
+            .btn-thaniya:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 35px rgba(16,185,129,0.55), inset 0 1px 0 rgba(255,255,255,0.5);
+            }
+        }
+        .btn-thaniya:active {
+            transform: scale(.98);
+            box-shadow: 0 4px 20px rgba(16,185,129,0.45), inset 0 1px 0 rgba(255,255,255,0.35);
+        }
+
+        .glass-header {
+            background: rgba(7,11,10,0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(16,185,129,0.12);
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .safe-footer { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-ping { animation: none; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body class="min-h-[100svh] flex flex-col relative selection:bg-emerald-500 selection:text-obsidian-950">
+
+    <canvas id="circuit-canvas" aria-hidden="true" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    <div class="fixed inset-0 ambient-top-glow pointer-events-none z-0"></div>
+
+    <!-- HEADER -->
+    <header class="glass-header sticky top-0 z-40 w-full">
+        <div class="max-w-6xl mx-auto px-4 py-3 sm:px-6 sm:py-4 lg:px-8 flex items-center justify-between gap-2">
+            <a href="#" class="flex items-center gap-2.5 sm:gap-3.5 group focus:outline-none min-w-0 shrink" aria-label="Thaniya AI home">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-obsidian-800 border border-emerald-500/25 flex items-center justify-center p-1.5 shadow-lg group-hover:border-emerald-400/60 transition-colors duration-300">
+                    <svg viewBox="0 0 100 85" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M18 68L24 44C26 35 33 27 42 24L48 16L62 18C68 19 73 24 76 30C79 34 83 34 85 29C87 24 85 17 81 12L86 8C92 15 95 25 91 34C88 41 80 43 74 39L71 37C73 41 78 44 85 44C81 48 74 49 68 46L63 43L61 52L66 68H57L53 53L46 53L43 68H34L36 52L29 52L26 68H18Z" fill="#F8FAFC"/>
+                        <path d="M47 22L56 24L54 42L43 37L47 22Z" fill="#090D0C" stroke="#10B981" stroke-width="1.8"/>
+                        <path d="M23 47H33L38 41H43" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="44" cy="41" r="2" fill="#34D399"/>
+                        <path d="M21 54H31L35 49H40" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="41" cy="49" r="2" fill="#34D399"/>
+                        <path d="M77 35C82 37 87 33 88 26" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 71H80" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col min-w-0">
+                    <span class="font-display font-bold text-base sm:text-xl tracking-wider text-white leading-none whitespace-nowrap">
+                        THANIYA <span class="text-emerald-400">AI</span>
+                    </span>
+                    <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.22em] text-slate-400 mt-1 font-medium truncate">
+                        Autonomous Intelligence
+                    </span>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-3 sm:gap-6 shrink-0">
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-400" aria-label="Primary">
+                    <a href="#capabilities" class="hover:text-emerald-400 transition-colors">Capabilities</a>
+                    <a href="#vision" class="hover:text-emerald-400 transition-colors">Vision</a>
+                </nav>
+
+                <div class="hidden min-[400px]:flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-obsidian-800/90 border border-emerald-500/20 text-[11px] sm:text-xs font-medium text-slate-300">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Online</span>
+                </div>
+
+                <a href="https://thaniyaai-cloud.pages.dev/"
+                   target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 active:scale-95 border border-emerald-500/35 text-emerald-300 font-semibold text-xs sm:text-sm whitespace-nowrap transition-all touch-manipulation">
+                    <span>Launch App</span>
+                    <svg class="w-3.5 h-3.5 hidden sm:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <path d="M7 17L17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="relative z-10 flex-grow w-full">
+
+        <!-- HERO -->
+        <section class="min-h-[85svh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+            <div class="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-6 sm:mb-8">
+                    <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Next-Gen Sri Lankan AI</span>
+                </div>
+
+                <h1 class="hero-headline font-display font-bold tracking-tight text-white mb-5 sm:mb-6">
+                    The Wisdom of a Giant.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-200">
+                        The Speed of AI.
+                    </span>
+                </h1>
+
+                <p class="text-sm sm:text-base md:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed mb-8 sm:mb-10 font-normal px-1">
+                    Inspired by the sharp intellect and quiet power of the lone tusker — <strong class="text-slate-200 font-semibold">Thaniya AI</strong> delivers deep reasoning, instant answers, and creative precision.
+                </p>
+
+                <a id="chat-cta-btn"
+                   href="https://thaniyaai-cloud.pages.dev/"
+                   target="_blank" rel="noopener noreferrer"
+                   class="btn-thaniya group w-full sm:w-auto min-h-[54px] inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl text-obsidian-950 font-bold text-base sm:text-lg tracking-wide cursor-pointer">
+                    <svg class="w-5 h-5 stroke-[2.3] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Chat with Thaniya</span>
+                    <svg class="w-5 h-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <p class="mt-5 sm:mt-6 text-xs text-slate-500 flex items-center justify-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500/60 shrink-0"></span>
+                    <span class="sm:hidden">Swipe or tap anywhere to illuminate the neural circuit grid</span>
+                    <span class="hidden sm:inline">Move cursor to illuminate the neural circuit grid</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- CAPABILITIES -->
+        <section id="capabilities" class="scroll-mt-24 px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex flex-col items-center text-center mb-6 sm:mb-8">
+                    <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-400 mb-2">Core Capabilities</span>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">What Thaniya Can Do</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <!-- Card 1 -->
+                    <div class="group p-6 sm:p-8 rounded-2xl bg-obsidian-900/80 border border-white/[0.07] hover:border-emerald-500/40 active:border-emerald-500/40 transition-all duration-300 backdrop-blur-md">
+                        <div class="flex items-center justify-between gap-2 mb-5">
+                            <div class="w-11 h-11 shrink-0 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 9h8M8 13h5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/[0.04] text-slate-400 border border-white/[0.06]">Conversational AI</span>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">Smart AI Chat &amp; Q&amp;A</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-2">
+                            Prompt naturally and get instant, intelligent answers just like a next-gen AI assistant.
+                        </p>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Ask complex questions, brainstorm ideas, draft content, or get real-time coding and research support.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div id="vision" class="scroll-mt-24 group p-6 sm:p-8 rounded-2xl bg-obsidian-900/80 border border-white/[0.07] hover:border-emerald-500/40 active:border-emerald-500/40 transition-all duration-300 backdrop-blur-md">
+                        <div class="flex items-center justify-between gap-2 mb-5">
+                            <div class="w-11 h-11 shrink-0 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="3" width="18" height="18" rx="3" ry="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <path d="M21 15l-5-5L5 21" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-white/[0.04] text-slate-400 border border-white/[0.06]">Text-to-Image</span>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">AI Image Generation</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-2">
+                            Describe your vision in words and generate crisp, high-resolution AI visuals effortlessly.
+                        </p>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Turn simple text prompts into custom digital artwork, brand concepts, and realistic imagery in seconds.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (single) -->
+    <footer class="safe-footer relative z-10 border-t border-white/[0.06] bg-obsidian-950/80 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-3 sm:gap-4">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs text-slate-500">
+                <span class="font-display font-semibold text-slate-300 tracking-wide">THANIYA <span class="text-emerald-500">AI</span></span>
+                <span>&bull;</span>
+                <span>&copy; 2026 All rights reserved.</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-5 sm:gap-6 text-xs text-slate-500">
+                <a href="#" class="py-1 hover:text-emerald-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="py-1 hover:text-emerald-400 transition-colors">Terms of Use</a>
+                <span class="text-slate-600">Colombo, LK</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        const canvas = document.getElementById('circuit-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        let width = 0, height = 0;
+        let isMobile = window.innerWidth < 640;
+        let gridSize = isMobile ? 48 : 64;
+        let animationFrameId = null;
+        let needsRebuild = true;
+
+        const pointer = {
+            x: -1000, y: -1000,
+            targetX: -1000, targetY: -1000,
+            radius: isMobile ? 190 : 260,
+            active: false
+        };
+
+        let circuitPaths = [];
+        let circuitNodes = [];
+
+        function buildCircuitPattern() {
+            // Use visualViewport when available (mobile URL bar)
+            const vv = window.visualViewport;
+            width = vv ? vv.width : window.innerWidth;
+            height = vv ? vv.height : window.innerHeight;
+            isMobile = width < 640;
+            gridSize = isMobile ? 48 : 64;
+            pointer.radius = isMobile ? 190 : 260;
+
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            circuitPaths = [];
+            circuitNodes = [];
+
+            const cols = Math.ceil(width / gridSize) + 1;
+            const rows = Math.ceil(height / gridSize) + 1;
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const x = c * gridSize;
+                    const y = r * gridSize;
+                    const hash = Math.sin(c * 12.9898 + r * 78.233) * 43758.5453;
+                    const rand = hash - Math.floor(hash);
+
+                    if (rand > 0.62) {
+                        circuitPaths.push({ x1: x, y1: y, x2: x + gridSize, y2: y, midX: x + gridSize * .5, midY: y });
+                        if (rand > 0.85) circuitNodes.push({ x: x + gridSize, y, r: isMobile ? 2 : 2.3 });
+                    } else if (rand > 0.34) {
+                        circuitPaths.push({ x1: x, y1: y, x2: x, y2: y + gridSize, midX: x, midY: y + gridSize * .5 });
+                        if (rand > 0.52) circuitNodes.push({ x, y: y + gridSize, r: isMobile ? 2 : 2.3 });
+                    } else if (rand > 0.18) {
+                        const endX = x + gridSize * .5;
+                        const endY = y + gridSize * .5;
+                        circuitPaths.push({ x1: x, y1: y, x2: endX, y2: endY, midX: (x + endX) * .5, midY: (y + endY) * .5 });
+                        circuitNodes.push({ x: endX, y: endY, r: isMobile ? 2.1 : 2.5 });
+                    }
+                }
+            }
+            needsRebuild = false;
+        }
+
+        let resizeTimer = null;
+        function handleResize() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                needsRebuild = true;
+            }, 150);
+        }
+        window.addEventListener('resize', handleResize, { passive: true });
+        window.addEventListener('orientationchange', handleResize, { passive: true });
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', handleResize, { passive: true });
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            pointer.targetX = e.clientX;
+            pointer.targetY = e.clientY;
+            pointer.active = true;
+        }, { passive: true });
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+                pointer.targetX = e.touches[0].clientX;
+                pointer.targetY = e.touches[0].clientY;
+                if (pointer.x < -500) { pointer.x = pointer.targetX; pointer.y = pointer.targetY; }
+                pointer.active = true;
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                pointer.targetX = e.touches[0].clientX;
+                pointer.targetY = e.touches[0].clientY;
+                pointer.active = true;
+            }
+        }, { passive: true });
+
+        function clearPointer() {
+            pointer.targetX = -1000;
+            pointer.targetY = -1000;
+        }
+        window.addEventListener('touchend', clearPointer, { passive: true });
+        window.addEventListener('touchcancel', clearPointer, { passive: true });
+        window.addEventListener('mouseleave', clearPointer);
+        // Clear spotlight on scroll (touch never fires mouseleave)
+        window.addEventListener('scroll', clearPointer, { passive: true });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            } else if (!animationFrameId && !reduceMotion) {
+                animationFrameId = requestAnimationFrame(render);
+            }
+        });
+
+        function drawBase() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(16,185,129,0.05)';
+            ctx.beginPath();
+            for (let i = 0; i < circuitPaths.length; i++) {
+                const p = circuitPaths[i];
+                ctx.moveTo(p.x1, p.y1);
+                ctx.lineTo(p.x2, p.y2);
+            }
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(16,185,129,0.065)';
+            for (let i = 0; i < circuitNodes.length; i++) {
+                const n = circuitNodes[i];
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawSpotlight() {
+            const radius = pointer.radius;
+            const radiusSq = radius * radius;
+            if (pointer.x <= -radius || pointer.y <= -radius || pointer.x >= width + radius || pointer.y >= height + radius) return;
+
+            const glow = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, radius);
+            glow.addColorStop(0, 'rgba(16,185,129,0.10)');
+            glow.addColorStop(1, 'rgba(16,185,129,0)');
+            ctx.fillStyle = glow;
+            ctx.fillRect(pointer.x - radius, pointer.y - radius, radius * 2, radius * 2);
+
+            ctx.lineWidth = 1.35;
+            for (let i = 0; i < circuitPaths.length; i++) {
+                const p = circuitPaths[i];
+                const dx = p.midX - pointer.x;
+                const dy = p.midY - pointer.y;
+                if (Math.abs(dx) > radius || Math.abs(dy) > radius) continue;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < radiusSq) {
+                    const intensity = 1 - Math.sqrt(distSq) / radius;
+                    ctx.strokeStyle = `rgba(52,211,153,${intensity * 0.48})`;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x1, p.y1);
+                    ctx.lineTo(p.x2, p.y2);
+                    ctx.stroke();
+                }
+            }
+
+            for (let i = 0; i < circuitNodes.length; i++) {
+                const n = circuitNodes[i];
+                const dx = n.x - pointer.x;
+                const dy = n.y - pointer.y;
+                if (Math.abs(dx) > radius || Math.abs(dy) > radius) continue;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < radiusSq) {
+                    const intensity = 1 - Math.sqrt(distSq) / radius;
+                    ctx.fillStyle = `rgba(52,211,153,${intensity * 0.85})`;
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r + intensity * 1.2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        function render() {
+            if (needsRebuild) buildCircuitPattern();
+            pointer.x += (pointer.targetX - pointer.x) * 0.14;
+            pointer.y += (pointer.targetY - pointer.y) * 0.14;
+
+            drawBase();
+            drawSpotlight();
+
+            // Skip RAF if pointer fully idle offscreen (saves battery)
+            const idle = pointer.targetX < -500 && Math.abs(pointer.x - pointer.targetX) < 1 && Math.abs(pointer.y - pointer.targetY) < 1;
+            if (idle) {
+                animationFrameId = null;
+                return;
+            }
+            animationFrameId = requestAnimationFrame(render);
+        }
+
+        // Reduced motion: static render only, no loop
+        if (reduceMotion) {
+            buildCircuitPattern();
+            drawBase();
+        } else {
+            buildCircuitPattern();
+            animationFrameId = requestAnimationFrame(render);
+
+            // Restart loop when user moves after idle stop
+            const wake = () => {
+                if (!animationFrameId) animationFrameId = requestAnimationFrame(render);
+            };
+            window.addEventListener('mousemove', wake, { passive: true });
+            window.addEventListener('touchstart', wake, { passive: true });
+            window.addEventListener('touchmove', wake, { passive: true });
+        }
+    })();
+    </script>
+</body>
+</html>
